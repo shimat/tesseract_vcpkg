@@ -63,4 +63,4 @@ build_script:
   - cmd: dir
 
 artifacts:
-  - path: **\*.nupkg
+  - path: '**\*.nupkg'
