@@ -59,11 +59,8 @@ configuration: Release
 build_script:
   - cmd: vcpkg install tesseract[cpu_independed]:x64-windows-static
   - cmd: vcpkg install tesseract[cpu_independed]:x86-windows-static
-  - cmd: vcpkg export tesseract[cpu_independed] --nuget
-  - cmd: dir
-
-after_build:
+  - cmd: vcpkg export tesseract[cpu_independed]:x64-windows-static tesseract[cpu_independed]:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:APPVEYOR_BUILD_VERSION
   - cmd: dir
 
 artifacts:
-  - path: artifacts\**\*.*
+  - path: **\*.nupkg
