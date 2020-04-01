@@ -61,8 +61,14 @@ build_script:
     vcpkg install tesseract:x64-windows-static
     vcpkg install tesseract:x86-windows-static
     vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:APPVEYOR_BUILD_VERSION
-    ls
+    vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --zip --nuget-id="tesseract_vcpkg" --nuget-version=$env:APPVEYOR_BUILD_VERSION
+    mkdir artifacts
     xcopy C:\Tools\vcpkg\*.nupkg .
+    xcopy C:\Tools\vcpkg\*.zip .
+    ls
 
 artifacts:
-  - path: '**\*.nupkg'
+  - path: 'artifacts\**\*.nupkg'
+    name: NuGet Package
+  - path: 'artifacts\**\*.zip'
+    name: Zip Package
