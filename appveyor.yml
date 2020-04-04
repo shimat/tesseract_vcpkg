@@ -1,8 +1,8 @@
 version: '0.0.4-beta{build}'
 
-#environment:
+environment:
+  VCPKG_BUILD_TYPE: Release
 #  APPVEYOR_SAVE_CACHE_ON_ERROR: false
-#  VCPKG_BUILD_TYPE: Release
 
 init:
 - ps: |
