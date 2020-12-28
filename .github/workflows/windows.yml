@@ -39,4 +39,4 @@ jobs:
           name: tesseract_artifacts
           path: |
             ${{ github.workspace }}\artifacts\tesseract_vcpkg.${{ env.VERSION }}.nupkg
-            ${{ github.workspace }}\artifacts\tesseract_vcpkg.${{ env.VERSION }}.zip'
+            ${{ github.workspace }}\artifacts\tesseract_vcpkg.${{ env.VERSION }}.zip
