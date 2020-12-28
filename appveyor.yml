@@ -1,4 +1,4 @@
-version: '0.0.5-beta{build}'
+version: '0.0.6-beta{build}'
 
 environment:
   VCPKG_BUILD_TYPE: Release
