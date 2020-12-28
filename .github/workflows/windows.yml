@@ -38,5 +38,5 @@ jobs:
         with:
           name: tesseract_artifacts
           path: |
-            ${{ github.workspace }}\artifacts\**\*.nupkg
-            ${{ github.workspace }}\artifacts\**\*.zip'
+            ${{ github.workspace }}\artifacts\*.nupkg
+            ${{ github.workspace }}\artifacts\*.zip'
