@@ -1,0 +1,40 @@
+name: Windows Server 2019
+
+on:
+  pull_request:
+    types: [synchronize, opened]
+
+env:
+  VERSION: "0.0.6-beta"
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Vcpkg Install
+        shell: powershell
+        run: |
+          vcpkg install tesseract:x64-windows-static
+          vcpkg install tesseract:x86-windows-static
+
+      - name: Vcpkg Export
+        shell: powershell
+        run: |
+          vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:VERSION
+          vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --zip --output=tesseract_vcpkg.${env:VERSION}
+          mkdir artifacts
+          cd artifacts
+          xcopy C:\vcpkg\*.nupkg .
+          xcopy C:\vcpkg\*.zip .
+          ls
+          cd ..
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: tesseract_artifacts
+          path: artifacts
