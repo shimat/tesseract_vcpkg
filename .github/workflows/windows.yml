@@ -15,21 +15,28 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
 
+      - name: Restore from cache and install vcpkg
+        uses: lukka/run-vcpkg@v6
+        with:
+          setupOnly: true
+          vcpkgGitCommitId: ec6fe06e8da05a8157dc8581fa96b36b571c1bd5 # tag:2020.11-1
+
       - name: Vcpkg Install
         shell: powershell
         run: |
-          vcpkg install tesseract:x64-windows-static
-          vcpkg install tesseract:x86-windows-static
+          echo ${env:VCPKG_ROOT}
+          & ${env:VCPKG_ROOT}\vcpkg install tesseract:x64-windows-static
+          & ${env:VCPKG_ROOT}\vcpkg install tesseract:x86-windows-static
 
       - name: Vcpkg Export
         shell: powershell
         run: |
-          vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:VERSION
-          vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --zip --output=tesseract_vcpkg.${env:VERSION}
+          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:VERSION
+          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --zip --output=tesseract_vcpkg.${env:VERSION}
           mkdir artifacts
           cd artifacts
-          xcopy C:\vcpkg\*.nupkg .
-          xcopy C:\vcpkg\*.zip .
+          xcopy ${env:VCPKG_ROOT}\*.nupkg .
+          xcopy ${env:VCPKG_ROOT}\*.zip .
           ls
           cd ..
 
