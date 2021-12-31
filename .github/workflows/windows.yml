@@ -5,11 +5,11 @@ on:
     types: [synchronize, opened]
 
 env:
-  VERSION: "0.0.6-beta"
+  VERSION: "0.0.7-beta"
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
       - name: Add msbuild to PATH
@@ -18,8 +18,9 @@ jobs:
       - name: Restore from cache and install vcpkg
         uses: lukka/run-vcpkg@v6
         with:
-          setupOnly: true
-          vcpkgGitCommitId: ec6fe06e8da05a8157dc8581fa96b36b571c1bd5 # tag:2020.11-1
+          # vcpkgGitCommitId: ec6fe06e8da05a8157dc8581fa96b36b571c1bd5 # tag:2020.11-1
+          vcpkgGitCommitId: 9502b2044d7fbe7a885f824f58e0b672e8b74886 # https://github.com/shimat/vcpkg/commit/9502b2044d7fbe7a885f824f58e0b672e8b74886
+          vcpkgGitURL: https://github.com/shimat/vcpkg.git
 
       - name: Vcpkg Install
         shell: powershell
