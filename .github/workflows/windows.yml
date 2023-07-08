@@ -5,7 +5,7 @@ on:
     types: [synchronize, opened]
 
 env:
-  VERSION: "0.0.7-beta"
+  VERSION: "0.0.8-beta"
 
 jobs:
   build:
@@ -13,13 +13,12 @@ jobs:
 
     steps:
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.3.1
 
       - name: Restore from cache and install vcpkg
-        uses: lukka/run-vcpkg@v10
+        uses: lukka/run-vcpkg@v11.1
         with:
-          # vcpkgGitCommitId: ec6fe06e8da05a8157dc8581fa96b36b571c1bd5 # tag:2020.11-1
-          vcpkgGitCommitId: 9502b2044d7fbe7a885f824f58e0b672e8b74886 # https://github.com/shimat/vcpkg/commit/9502b2044d7fbe7a885f824f58e0b672e8b74886
+          vcpkgGitCommitId: "64adda19c86e89526b5e27703a193c14477cce07"
           vcpkgGitURL: https://github.com/shimat/vcpkg.git
 
       - name: Vcpkg Install
