@@ -27,6 +27,7 @@ jobs:
           echo ${env:VCPKG_ROOT}
           & ${env:VCPKG_ROOT}\vcpkg install tesseract:x64-windows-static
           & ${env:VCPKG_ROOT}\vcpkg install tesseract:x86-windows-static
+          & ${env:VCPKG_ROOT}\vcpkg install tesseract:arm64-windows-static
 
       - name: Vcpkg Export
         shell: powershell
