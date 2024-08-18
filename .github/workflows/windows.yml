@@ -27,12 +27,13 @@ jobs:
           echo ${env:VCPKG_ROOT}
           & ${env:VCPKG_ROOT}\vcpkg install tesseract:x64-windows-static
           & ${env:VCPKG_ROOT}\vcpkg install tesseract:x86-windows-static
+          & ${env:VCPKG_ROOT}\vcpkg install tesseract:arm64-windows-static
 
       - name: Vcpkg Export
         shell: powershell
         run: |
-          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:VERSION
-          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static --zip --output=tesseract_vcpkg.${env:VERSION}
+          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static tesseract:arm64-windows-static --nuget --nuget-id="tesseract_vcpkg" --nuget-version=$env:VERSION
+          & ${env:VCPKG_ROOT}\vcpkg export tesseract:x64-windows-static tesseract:x86-windows-static tesseract:arm64-windows-static --zip --output=tesseract_vcpkg.${env:VERSION}
           mkdir artifacts
           cd artifacts
           xcopy ${env:VCPKG_ROOT}\*.nupkg .
