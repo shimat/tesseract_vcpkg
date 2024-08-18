@@ -3,9 +3,12 @@ name: Windows Server 2022
 on:
   pull_request:
     types: [synchronize, opened]
+  push:
+    branches: [ "main" ]
+    
 
 env:
-  VERSION: "0.0.8-beta"
+  VERSION: "0.0.9-beta"
 
 jobs:
   build:
@@ -13,7 +16,7 @@ jobs:
 
     steps:
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.3.1
+        uses: microsoft/setup-msbuild@v2
 
       - name: Restore from cache and install vcpkg
         uses: lukka/run-vcpkg@v11.1
